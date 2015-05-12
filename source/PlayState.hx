@@ -1,11 +1,13 @@
 package;
 
+import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
+
 
 /**
  * A FlxState which can be used for the actual gameplay.
@@ -18,9 +20,11 @@ class PlayState extends FlxState
 	 */
 	override public function create():Void
 	{
+		add(new flixel.addons.display.FlxBackdrop(AssetPaths.background_draft__png, 1, 1, false, false ));
 		add(new FlxText(30, 40, 100, "Its ALIVE"));
 		_player = new Player(50, 50);
 		add(_player);
+		FlxG.camera.follow(_player, FlxCamera.STYLE_TOPDOWN, 1);
 		super.create();
 	}
 	
