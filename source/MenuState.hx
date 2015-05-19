@@ -22,8 +22,8 @@ class MenuState extends FlxState
 	 */
 	override public function create():Void
 	{
-		add(new FlxText(0, 0, 100, "Hello World"));
 		_btnPlay = new FlxButton(20, 20, "Test Button", testfunction);
+		_btnPlay.loadGraphic(AssetPaths.standard__png, false, 1200, 720);
 		add(_btnPlay);
 		_btnPlay.screenCenter();
 		super.create();
@@ -31,7 +31,6 @@ class MenuState extends FlxState
 	
 	function testfunction()
 	{
-		add(new FlxText(20, 40, 100, "This seems to work reasonably well"));
 		FlxG.switchState(new PlayState());
 	}
 	

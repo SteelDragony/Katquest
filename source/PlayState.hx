@@ -6,6 +6,7 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
+import flixel.util.FlxColor;
 import flixel.util.FlxMath;
 
 
@@ -15,6 +16,8 @@ import flixel.util.FlxMath;
 class PlayState extends FlxState
 {
 	private var _player:Player;
+	private var _hitTestObject:FlxSprite;
+	private var _hitTestObject2:FlxSprite;
 	/**
 	 * Function that is called up when to state is created to set it up. 
 	 */
@@ -24,6 +27,15 @@ class PlayState extends FlxState
 		add(new FlxText(30, 40, 100, "Its ALIVE"));
 		_player = new Player(50, 50);
 		add(_player);
+		_hitTestObject = new FlxSprite(200, 200);
+		_hitTestObject.makeGraphic(20, 20, FlxColor.RED);
+		_hitTestObject.immovable = true;
+		add(_hitTestObject);
+		_hitTestObject2 = new FlxSprite(200, 300);
+		_hitTestObject2.makeGraphic(20, 20, FlxColor.GREEN);
+		_hitTestObject2.immovable = true;
+		add(_hitTestObject2);
+
 		FlxG.camera.follow(_player, FlxCamera.STYLE_TOPDOWN, 1);
 		super.create();
 	}
@@ -43,5 +55,12 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		super.update();
+		FlxG.collide(_player, _hitTestObject);
+		FlxG.collide(_player, _hitTestObject2, talkToNPC);
 	}	
+	
+	private function talkToNPC(player:Player, npc:FlxSprite)
+	{
+		add(new FlxText(npc.x, npc.y - 30, 200, "Hi there, are you talking to me right meow?"));
+	}
 }
