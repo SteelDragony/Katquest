@@ -1,15 +1,15 @@
 -main ApplicationMain 
 -cp C:/HaxeToolkit/haxe/lib/flixel-addons/1,1,0
 -D flixel-addons=1.1.0
--cp C:/HaxeToolkit/haxe/lib/openfl/3,0,4
--D openfl=3.0.4
+-cp C:/HaxeToolkit/haxe/lib/openfl/3,0,6
+-D openfl=3.0.6
 -cp C:/HaxeToolkit/haxe/lib/flixel/3,3,8
 -D flixel=3.3.8
--cp C:/HaxeToolkit/haxe/lib/lime/2,4,0
--D lime=2.4.0
+-cp C:/HaxeToolkit/haxe/lib/lime/2,4,1
+-D lime=2.4.1
 -cp source
 -D openfl-next
--D tools=2.4.0
+-D tools=2.4.1
 -D FLX_NO_DEBUG
 -D flash-use-stage
 -D no-compilation
@@ -20,5 +20,5 @@
 -swf-lib export/flash/obj/assets.swf
 -swf-version 11.8
 -swf export/flash/bin/KatQuest.swf
--swf-header 640:480:60:000000
+-swf-header 1280:720:60:000000
 -cp export/flash/haxe

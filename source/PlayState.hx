@@ -29,7 +29,8 @@ class PlayState extends FlxState
 		add(_player);
 		_hitTestObject = new FlxSprite(200, 200);
 		_hitTestObject.makeGraphic(20, 20, FlxColor.RED);
-		_hitTestObject.immovable = true;
+		_hitTestObject.immovable = false;
+		_hitTestObject.drag.x = _hitTestObject.drag.y = 200;
 		add(_hitTestObject);
 		_hitTestObject2 = new FlxSprite(200, 300);
 		_hitTestObject2.makeGraphic(20, 20, FlxColor.GREEN);
@@ -61,6 +62,6 @@ class PlayState extends FlxState
 	
 	private function talkToNPC(player:Player, npc:FlxSprite)
 	{
-		add(new FlxText(npc.x, npc.y - 30, 200, "Hi there, are you talking to me right meow?"));
+		add(new FlxText(npc.x, npc.y - 30, 200, "Hi there, are you talking to me right meow?", 20));
 	}
 }

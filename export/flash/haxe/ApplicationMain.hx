@@ -58,6 +58,10 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
+		urls.push ("assets/images/player_character.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
 		urls.push ("assets/images/standard.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
@@ -175,7 +179,7 @@ class ApplicationMain {
 			fps: Std.int (60),
 			fullscreen: false,
 			hardware: true,
-			height: Std.int (480),
+			height: Std.int (720),
 			orientation: "portrait",
 			packageName: "com.example.myapp",
 			resizable: true,
@@ -183,13 +187,13 @@ class ApplicationMain {
 			title: "KatQuest",
 			version: "0.0.1",
 			vsync: true,
-			width: Std.int (640),
+			width: Std.int (1280),
 			
 		}
 		
 		#if (js && html5)
 		#if (munit || utest)
-		openfl.Lib.embed (null, 640, 480, "000000");
+		openfl.Lib.embed (null, 1280, 720, "000000");
 		#end
 		#else
 		create ();
