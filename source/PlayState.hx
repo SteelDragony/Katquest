@@ -1,14 +1,16 @@
 package;
 
+import flixel.addons.editors.ogmo.FlxOgmoLoader;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
+import flixel.tile.FlxTilemap;
 import flixel.ui.FlxButton;
 import flixel.util.FlxColor;
 import flixel.util.FlxMath;
-
+import flixel.FlxObject;
 
 /**
  * A FlxState which can be used for the actual gameplay.
@@ -18,12 +20,20 @@ class PlayState extends FlxState
 	private var _player:Player;
 	private var _hitTestObject:FlxSprite;
 	private var _hitTestObject2:FlxSprite;
+	
+	private var _map:FlxOgmoLoader;
+	private var _mWalls:FlxTilemap;
 	/**
 	 * Function that is called up when to state is created to set it up. 
 	 */
 	override public function create():Void
 	{
-		add(new flixel.addons.display.FlxBackdrop(AssetPaths.background_draft__png, 1, 1, false, false ));
+		_map = new FlxOgmoLoader(AssetPaths.livingroom__oel);
+		_mWalls = _map.loadTilemap(AssetPaths.tiles__png, 15, 15, "walls");
+		_mWalls.setTileProperties(1, FlxObject.NONE);
+		_mWalls.setTileProperties(2, FlxObject.ANY);
+		add(_mWalls);
+		add(new flixel.addons.display.FlxBackdrop(AssetPaths.livingroom__png, 1, 1, false, false ));
 		add(new FlxText(30, 40, 100, "Its ALIVE"));
 		_player = new Player(50, 50);
 		add(_player);
@@ -32,7 +42,7 @@ class PlayState extends FlxState
 		_hitTestObject.immovable = false;
 		_hitTestObject.drag.x = _hitTestObject.drag.y = 200;
 		add(_hitTestObject);
-		_hitTestObject2 = new FlxSprite(200, 300);
+		_hitTestObject2 = new FlxSprite(200, 500);
 		_hitTestObject2.makeGraphic(20, 20, FlxColor.GREEN);
 		_hitTestObject2.immovable = true;
 		add(_hitTestObject2);
@@ -58,6 +68,7 @@ class PlayState extends FlxState
 		super.update();
 		FlxG.collide(_player, _hitTestObject);
 		FlxG.collide(_player, _hitTestObject2, talkToNPC);
+		FlxG.collide(_player, _mWalls);
 	}	
 	
 	private function talkToNPC(player:Player, npc:FlxSprite)

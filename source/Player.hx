@@ -21,8 +21,9 @@ class Player extends FlxSprite
 		loadGraphic(AssetPaths.player_character__png , true, 256, 256);
 		setFacingFlip(FlxObject.LEFT, true, false);
 		setFacingFlip(FlxObject.RIGHT, false, false);
-		this.setGraphicSize(-1, 64);
+		this.setGraphicSize(-1, 32);
 		updateHitbox();
+		setGraphicSize( -1, 64);
 		animation.add("lr", [2], 6, false);
 		animation.add("u", [1], 6, false);
 		animation.add("d", [0], 6, false);

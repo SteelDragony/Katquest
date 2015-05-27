@@ -23,7 +23,7 @@ class MenuState extends FlxState
 	override public function create():Void
 	{
 		_btnPlay = new FlxButton(20, 20, "Test Button", testfunction);
-		_btnPlay.loadGraphic(AssetPaths.standard__png, false, 1200, 720);
+		_btnPlay.loadGraphic(AssetPaths.standard__png, false, 200, 120);
 		add(_btnPlay);
 		_btnPlay.screenCenter();
 		super.create();
