@@ -17,16 +17,41 @@ class MenuState extends FlxState
 {
 	
 	private var _btnPlay:FlxButton;
+	private var _backdrop:FlxSprite;
 	/**
 	 * Function that is called up when to state is created to set it up. 
 	 */
 	override public function create():Void
 	{
+		_backdrop = new FlxSprite(0, 0, AssetPaths.Afbeelding1__png);
+		_backdrop.setGraphicSize(640, 360);
+		_backdrop.updateHitbox();
+		trace(_backdrop.width, _backdrop.height);
+		add(_backdrop);
+		
 		_btnPlay = new FlxButton(20, 20, "Test Button", testfunction);
-		_btnPlay.loadGraphic(AssetPaths.standard__png, false, 200, 120);
+		_btnPlay.loadGraphic(AssetPaths.standard__png, false, 100, 35);
+		_btnPlay.onOver.callback = buttonHover;
+		_btnPlay.onDown.callback = buttonClick;
+		_btnPlay.onOut.callback = buttonOut;
 		add(_btnPlay);
 		_btnPlay.screenCenter();
 		super.create();
+	}
+	
+	function buttonOut() 
+	{
+		_btnPlay.loadGraphic(AssetPaths.standard__png);
+	}
+	
+	function buttonHover()
+	{
+		_btnPlay.loadGraphic(AssetPaths.hover__png);
+	}
+	
+	function buttonClick()
+	{
+		_btnPlay.loadGraphic(AssetPaths.click__png);
 	}
 	
 	function testfunction()

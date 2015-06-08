@@ -18,15 +18,17 @@ class Player extends FlxSprite
 	public function new(X:Float=0, Y:Float=0) 
 	{
 		super(X, Y);
-		loadGraphic(AssetPaths.player_character__png , true, 256, 256);
+		loadGraphic(AssetPaths.animTest4__png, true, 256, 256);
 		setFacingFlip(FlxObject.LEFT, true, false);
 		setFacingFlip(FlxObject.RIGHT, false, false);
+		setFacingFlip(FlxObject.DOWN, false, false);
+		setFacingFlip(FlxObject.UP, false, false);
 		this.setGraphicSize(-1, 32);
 		updateHitbox();
 		setGraphicSize( -1, 64);
-		animation.add("lr", [2], 6, false);
-		animation.add("u", [1], 6, false);
-		animation.add("d", [0], 6, false);
+		animation.add("lr", [6,7,6,8], 6, false);
+		animation.add("u", [3,4,3,5], 6, false);
+		animation.add("d", [0,1,0,2], 6, false);
 		
 		drag.x = drag.y = 1600;
 	}
