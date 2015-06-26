@@ -3,6 +3,7 @@ package ;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
+import flixel.system.FlxSound;
 import flixel.util.FlxAngle;
 import flixel.util.FlxColor;
 import flixel.util.FlxPoint;
@@ -13,12 +14,14 @@ import flixel.util.FlxPoint;
  */
 class Player extends FlxSprite
 {
-	public var speed:Float = 200;
+	public var speed:Float = 300;
+	var playingWalkSound:Bool = false;
+	var walkSound:FlxSound = new FlxSound();
 	
 	public function new(X:Float=0, Y:Float=0) 
 	{
 		super(X, Y);
-		loadGraphic(AssetPaths.animTest4__png, true, 256, 256);
+		loadGraphic(AssetPaths.player_character__png, true, 256, 256);
 		setFacingFlip(FlxObject.LEFT, true, false);
 		setFacingFlip(FlxObject.RIGHT, false, false);
 		setFacingFlip(FlxObject.DOWN, false, false);
@@ -30,6 +33,7 @@ class Player extends FlxSprite
 		animation.add("u", [3,4,3,5], 6, false);
 		animation.add("d", [0,1,0,2], 6, false);
 		
+		walkSound.loadEmbedded(AssetPaths.footsteps__mp3);
 		drag.x = drag.y = 1600;
 	}
 	
@@ -50,6 +54,15 @@ class Player extends FlxSprite
 		_down = FlxG.keys.anyPressed(["DOWN", "S"]);
 		_left = FlxG.keys.anyPressed(["LEFT", "A"]);
 		_right = FlxG.keys.anyPressed(["RIGHT", "D"]);
+		
+		if (_up || _down || _left || _right)
+		{
+			walkSound.play();
+		}
+		else
+		{
+			walkSound.stop();
+		}
 		
 		if (_up && _down)
 		{
@@ -118,5 +131,4 @@ class Player extends FlxSprite
 		}
 		
 	}
-	
 }

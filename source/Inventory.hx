@@ -12,14 +12,16 @@ import flixel.text.FlxText;
 class Inventory extends FlxTypedGroup<FlxSprite>
 {
 	var _background:FlxSprite = new FlxSprite();
-	var _quests:Array<Quest> = new Array<Quest>();
+	public var _quests:Array<Quest> = new Array<Quest>();
+	public var _Collectibles:Array<Collectible> = new Array<Collectible>();
 	
 	public function new() 
 	{
 		super();
-		_background.loadGraphic(AssetPaths.Menu__png);
+		_background.loadGraphic(AssetPaths.inventory__png);
 		_background.setGraphicSize(640, 360);
 		_background.updateHitbox();
+
 		add(_background);
 		
 	}
@@ -34,29 +36,55 @@ class Inventory extends FlxTypedGroup<FlxSprite>
 		
 		forEach(function(spr:FlxSprite) {
 			spr.scrollFactor.set();
-			if (spr != _background)
+			//if (spr != _background)
+			//{
+				//spr.x = 452 + column * 60;
+				//spr.y = 50 + row * 70;
+				//column ++;
+				//if ( column == 3)
+				//{
+					//column = 0;
+					//row ++;
+				//}
+				//tempArray.push(spr);
+			//}
+		});
+		for ( i in _Collectibles)
+		{
+			i.x = 432 + column * 68;
+			i.y = 83 + row * 70;
+			column ++;
+			if ( column == 3)
 			{
-				spr.x = 452 + column * 60;
-				spr.y = 50 + row * 70;
-				column ++;
-				if ( column == 3)
-				{
-					column = 0;
-					row ++;
-				}
-				tempArray.push(spr);
+				column = 0;
+				row ++;
 			}
-        });
+		}
+        updateQuestCompletion();
+
+	}
+	
+	public function updateQuestCompletion()
+	{
 		for (i in _quests)
 		{
-			i.checkCompletion(tempArray);
+			i.checkCompletion(_Collectibles);
+			i.questText.x = 50;
+			i.questText.y = 80 + _quests.indexOf(i) * 20;
 		}
 	}
 	
 	public function addQuest(quest:Quest)
 	{
 		_quests.push(quest);
-		var questText:FlxText = new FlxText(50, 50, 300, quest.questText);
-		add(questText);
+
+		add(quest.questText);
+	}
+	
+	public function addCollectible(item:Collectible)
+	{
+		_Collectibles.push(item);
+		add(item);
+		updateQuestCompletion();
 	}
 }

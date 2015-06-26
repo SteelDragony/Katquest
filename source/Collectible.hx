@@ -8,11 +8,13 @@ import flixel.FlxSprite;
  */
 class Collectible extends FlxSprite
 {
-
-	public function new(X:Float=0, Y:Float=0, ?SimpleGraphic:Dynamic) 
+	public var name:String;
+	var spawned:Bool = false;
+	public function new(X:Float=0, Y:Float=0, ?SimpleGraphic:Dynamic, mapName:String) 
 	{
 		super(X, Y, SimpleGraphic);
-		
+		name = mapName;
+		immovable = true;
 	}
 	
 }

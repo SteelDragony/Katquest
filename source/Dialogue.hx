@@ -18,8 +18,9 @@ class Dialogue extends FlxGroup
 	public function new(x:Float, y:Float, npcText:Array<String>) 
 	{
 		super();
-		add( new FlxSprite(x - 50, y - 100).makeGraphic( 200, 50, FlxColor.FOREST_GREEN));
-		add(currentText = new FlxText(x - 50, y - 100, 200, npcText[0], 8));
+		add( new FlxSprite(x - 52, y - 52, AssetPaths.text_bubble__png));
+		add(currentText = new FlxText(x - 50, y - 50, 180, npcText[0], 8));
+		currentText.color = 0x333333;
 		currentText.alignment = "left";
 		npcDialogue = npcText;
 	}
@@ -32,7 +33,6 @@ class Dialogue extends FlxGroup
 	
 	public function StepThroughText():Bool
 	{
-		trace(currentTextIndex, npcDialogue.length);
 		if ( currentTextIndex < npcDialogue.length - 1)
 		{
 			currentTextIndex ++;
